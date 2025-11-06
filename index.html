@@ -1,28 +1,120 @@
- <h1>Guess the number</h1>
- <input id="guessnumber">
- <button onclick="check()">Check</button>
- <p id ="result">you are Wrong/Right</p>
- <p id="score">Score:10</p>
- <script>
-   var guessnumber=document.getElementById("guessnumber")
-   var result=document.getElementById("result")
-   var Score=document.getElementById("score")
-   var randomnumber=Math.floor(Math.random()*10)+1
-   var totalscore=10
-   function check()
-   {
-     var enterednumber= guessnumber.value
-     if(randomnumber==enterednumber)
-     {
-      console.log("Right")
-      result.textContent="Right"
-      alert("YOU WON....")
-     }
-     else
-     {
-      totalscore=totalscore-1
-      score.textContent="score:"+totalscore
-      result.textContent="Wrong"
-     }
-   }
- </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    #game-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    input {
+      padding: 10px 15px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      width: 100px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #ffcc00;
+      color: #333;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffdb4d;
+      transform: scale(1.05);
+    }
+
+    #result {
+      font-size: 1.3em;
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .right {
+      color: #00ff88;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: #ff5555;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>🎯 Guess the Number</h1>
+    <input id="guessnumber" type="number" min="1" max="10" placeholder="1–10">
+    <button onclick="check()">Check</button>
+    <p id="result">Make your guess!</p>
+    <p id="score">Score: 10</p>
+  </div>
+
+  <script>
+    var guessnumber = document.getElementById("guessnumber");
+    var result = document.getElementById("result");
+    var score = document.getElementById("score");
+    var randomnumber = Math.floor(Math.random() * 10) + 1;
+    var totalscore = 10;
+
+    function check() {
+      var enterednumber = Number(guessnumber.value);
+
+      if (enterednumber === randomnumber) {
+        result.textContent = "🎉 You guessed it right!";
+        result.className = "right";
+        alert("YOU WON! 🎊 The number was " + randomnumber);
+      } else {
+        totalscore--;
+        score.textContent = "Score: " + totalscore;
+        result.textContent = "❌ Wrong! Try again.";
+        result.className = "wrong";
+      }
+
+      if (totalscore <= 0) {
+        alert("Game Over! The number was " + randomnumber);
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
